@@ -1,22 +1,29 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { ConnectorProvider } from './context/ConnectorContext';
-import { ToastProvider } from './components/common/Toast';
-import IntegrationHubPage from './pages/IntegrationHubPage';
-import SourceIntakePlaceholder from './pages/SourceIntakePlaceholder';
+import './App.css';
 
-export default function App() {
+// Import your new components
+import { Header } from './components/Header';
+import { PageHeader } from './components/PageHeader';
+import { IntegrationPanels } from './components/IntegrationPanels';
+import { Sidebar } from './components/Sidebar';
+import { BottomBar } from './components/BottomBar';
+
+function App() {
   return (
-    <ToastProvider>
-      <ConnectorProvider>
-        <Routes>
-          <Route path="/" element={<Navigate to="/integration-hub" replace />} />
-          <Route path="/integration-hub" element={<IntegrationHubPage />} />
-          <Route path="/source-intake" element={<SourceIntakePlaceholder />} />
-          <Route path="/reports" element={<div className="min-h-screen text-text p-6">Reports (placeholder)</div>} />
-          <Route path="*" element={<Navigate to="/integration-hub" replace />} />
-        </Routes>
-      </ConnectorProvider>
-    </ToastProvider>
+    <div className="min-h-screen font-sans text-neutral-800 pb-36">
+      <Header />
+      
+      <PageHeader />
+
+      {/* MAIN CONTENT GRID */}
+      <main className="px-8 py-4 flex flex-col xl:flex-row gap-6">
+        <IntegrationPanels />
+        <Sidebar />
+      </main>
+
+      <BottomBar />
+    </div>
   );
 }
+
+export default App;
