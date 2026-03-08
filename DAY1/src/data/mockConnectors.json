@@ -1,0 +1,41 @@
+{
+  "primaryConnectors": [
+    {
+      "id": "servicenow",
+      "title": "ServiceNow",
+      "stats": [
+        { "bold": "2,847", "label": "Incidents",      "connected": true  },
+        { "label": "312 CMDB items",                   "connected": false }
+      ],
+      "actions": ["Configure & Sync", "View data"]
+    },
+    {
+      "id": "jira",
+      "title": "Jira & Confluence",
+      "stats": [
+        { "bold": "5,847", "label": "Records ingested", "connected": true },
+        { "label": "Emails – Teams Chats",               "connected": true }
+      ],
+      "actions": ["Configure & Sync", "View data"]
+    },
+    {
+      "id": "m365",
+      "title": "Microsoft 365",
+      "stats": [
+        { "label": "Not connected",         "connected": false },
+        { "label": "Last synced 2 hrs ago", "connected": true  }
+      ],
+      "actions": ["Connect", "View data"]
+    }
+  ],
+  "coverageConnectors": [
+    { "id": "sap",    "title": "SAP",    "objectLabel": "Object 1" },
+    { "id": "github", "title": "GitHub", "objectLabel": "Object 2" },
+    { "id": "slack",  "title": "Slack",  "objectLabel": "Object 2" }
+  ],
+  "accessItems": [
+    { "label": "CMDB items",       "arrow": true  },
+    { "label": "Incident Tickets", "arrow": false },
+    { "label": "Change Logs",      "arrow": false }
+  ]
+}
