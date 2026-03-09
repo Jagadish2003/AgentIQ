@@ -69,8 +69,7 @@ function IntegrationPanels() {
             <div className="bg-[#e0e0e0] text-sm py-1 px-3 rounded w-fit flex items-center gap-2"><div className="w-2 h-2 bg-neutral-400 rounded-sm"></div> Object 2</div>
             <button className="w-full mt-auto bg-[#e0e0e0] border border-neutral-300 text-sm py-1.5 rounded hover:bg-neutral-300 transition-colors">View data</button>
           </div>
-          {/* This empty div is for the Databricks card, which was not in your final code. I've left a placeholder */}
-        </div>
+          </div>
       </div>
     </div>
   );
