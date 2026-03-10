@@ -70,10 +70,11 @@ export default function UploadPanel({
 
                   <button
                     onClick={() => onRemove(file.id)}
-                    className="ml-4 text-xs font-bold text-muted transition-colors hover:text-white"
+                    className="ml-3 px-3 py-1 text-xs font-semibold text-red-400 border border-red-500/40 rounded-md bg-gradient-to-b from-red-500/15 via-red-500/5 to-red-500/15 transition-all duration-200 hover:from-red-500/25 hover:via-red-500/10 hover:to-red-500/25 hover:border-red-400/60 hover:text-red-300 hover:shadow-[0_0_10px_rgba(239,68,68,0.2)] active:scale-95 shrink-0"
                   >
                     Remove
                   </button>
+                  
                 </div>
               ))}
             </div>

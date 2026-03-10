@@ -14,7 +14,7 @@ export default function TopNav() {
   const loc = useLocation();
 
   return (
-    <div className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur">
+   <div className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
       <div className="mx-auto flex w-full items-center px-6 py-3">
         <div className="ml-3 flex items-center gap-2">
           <div className="h-7 w-7 rounded-md bg-accent/20" />
@@ -46,7 +46,7 @@ export default function TopNav() {
             <ChevronDown size={16} strokeWidth={2.5} className="text-slate-400" />
           </div>
 
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-panel2">
+          <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full hover:bg-panel2 hover:text-text">
             <User className="h-5 w-5 text-slate-400" />
           </div>
         </div>

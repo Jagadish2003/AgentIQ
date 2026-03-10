@@ -1,15 +1,41 @@
 import React from 'react';
-
-export default function TabsHeader({ tab, onTab }: { tab: 'Entities' | 'Opportunities'; onTab: (t: 'Entities' | 'Opportunities') => void; }) {
-  const base = 'px-4 py-2 text-sm font-semibold border-b-2';
+ 
+export default function TabsHeader({
+  tab,
+  onTab
+}: {
+  tab: 'Entities' | 'Opportunities';
+  onTab: (t: 'Entities' | 'Opportunities') => void;
+}) {
   return (
-    <div className="flex gap-2">
-      <button className={`${base} ${tab === 'Entities' ? 'border-accent text-text' : 'border-transparent text-muted hover:text-text'}`} onClick={() => onTab('Entities')}>
+    <div className="inline-flex border border-border bg-panel rounded-sm overflow-hidden">
+ 
+      {/* Entities */}
+      <button
+        onClick={() => onTab('Entities')}
+        className={`px-4 py-1.5 text-sm font-medium transition
+        ${
+          tab === 'Entities'
+            ? 'bg-white text-gray-800'
+            : 'bg-panel text-muted hover:bg-surface hover:text-text'
+        }`}
+      >
         Entities
       </button>
-      <button className={`${base} ${tab === 'Opportunities' ? 'border-accent text-text' : 'border-transparent text-muted hover:text-text'}`} onClick={() => onTab('Opportunities')}>
+ 
+      {/* Opportunities */}
+      <button
+        onClick={() => onTab('Opportunities')}
+        className={`px-4 py-1.5 text-sm font-medium border-l border-border transition
+        ${
+          tab === 'Opportunities'
+            ? 'bg-white text-gray-800'
+            : 'bg-panel text-muted hover:bg-surface hover:text-text'
+        }`}
+      >
         Opportunities (preview)
       </button>
+ 
     </div>
   );
 }

@@ -78,8 +78,8 @@ export default function SourceIntakePage() {
           </div>
         </div>
 
-        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-bg/90 backdrop-blur">
-          <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3">
+        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-bg/90 backdrop-blur shadow-[0_-4px_12px_rgba(0,0,0,0.35)]">
+           <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3">
             <Button variant="secondary" onClick={() => nav('/integration-hub')}>
               <ChevronLeft size={16} strokeWidth={2.5} />
               Back

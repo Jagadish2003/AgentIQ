@@ -24,35 +24,61 @@ export default function DiscoveryStartBar({
   const isHigh = step === 'high';
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 w-full">
-      <div className="w-full border-t border-border bg-panel px-6 py-4 shadow-xl">
+    <div className="fixed bottom-0 left-0 right-0 border-t border-border bg-bg/80 backdrop-blur shadow-[0_-4px_12px_rgba(0,0,0,0.15)] z-40">
+      <div className="w-full px-6 py-4">
         <div className="flex flex-wrap items-center justify-between gap-6">
+
+          {/* Confidence bar — matches top-right card style */}
           <div className="flex items-center text-sm">
             <div className="flex items-center">
               <div
-                className={`h-3 w-3 rounded-full ${
-                  isLow ? 'bg-accent shadow-[0_0_8px_3px_rgba(0,255,200,0.35)]' : 'bg-border'
+                className={`h-2.5 w-2.5 rounded-full ${
+                  isLow
+                    ? 'bg-accent shadow-[0_0_8px_3px_rgba(0,255,200,0.35)]'
+                    : 'bg-muted/40'
                 }`}
               />
-              <span className={`ml-2 ${isLow ? 'font-semibold text-text' : 'text-muted'}`}>Low</span>
+              <span className={`ml-2 ${isLow ? 'font-semibold text-text' : 'text-muted'}`}>
+                Low
+              </span>
             </div>
 
-            <div className="mx-3 h-[1px] w-24 bg-border" />
+            <div
+              className={`mx-3 h-[1px] w-16 transition-colors ${
+                isMedium || isHigh ? 'bg-accent/50' : 'bg-border'
+              }`}
+            />
 
             <div className="flex items-center">
               <div
-                className={`h-3 w-3 rounded-full ${
-                  isMedium ? 'bg-accent shadow-[0_0_8px_3px_rgba(0,255,200,0.35)]' : 'bg-border'
+                className={`h-2.5 w-2.5 rounded-full ${
+                  isMedium
+                    ? 'bg-accent shadow-[0_0_8px_3px_rgba(0,255,200,0.35)]'
+                    : 'bg-muted/40'
                 }`}
               />
-              <span className={`ml-2 ${isMedium ? 'font-semibold text-text' : 'text-muted'}`}>Medium</span>
+              <span className={`ml-2 ${isMedium ? 'font-semibold text-text' : 'text-muted'}`}>
+                Medium
+              </span>
             </div>
 
-            <div className="mx-3 h-[1px] w-24 bg-border" />
+            <div
+              className={`mx-3 h-[1px] w-16 transition-colors ${
+                isHigh ? 'bg-accent/50' : 'bg-border'
+              }`}
+            />
 
             <div className="flex items-center">
-              <div className={`h-3 w-3 rounded-full ${isHigh ? 'bg-accent' : 'bg-border'}`} />
-              <span className={`ml-2 ${isHigh ? 'font-semibold text-text' : 'text-muted'}`}>High</span>
+              <div
+                className={`h-2.5 w-2.5 rounded-full ${
+                  isHigh
+                    ? 'bg-accent ]'
+                    : 'bg-muted/40'
+                }`}
+              />
+              <span className={`ml-2 ${isHigh ? 'font-semibold text-text' : 'text-muted'}`}>
+                High
+              </span>
             </div>
           </div>
 
@@ -75,7 +101,7 @@ export default function DiscoveryStartBar({
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={onUpload}
-              className="rounded-md border border-border px-4 py-1.5 text-sm text-text transition hover:bg-panel2"
+              className="rounded-md border border-border bg-panel2 px-4 py-2 text-sm text-text transition hover:bg-panel"
             >
               Upload Files Instead
             </button>
