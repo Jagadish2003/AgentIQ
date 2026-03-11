@@ -1,5 +1,6 @@
 import React from 'react';
 import { ConfidenceExplanation } from '../../types/normalization';
+import { ChevronRight } from 'lucide-react';
 
 export default function ConfidenceBanner({ conf, onAction }: { conf: ConfidenceExplanation; onAction: () => void; }) {
   return (
@@ -12,8 +13,9 @@ export default function ConfidenceBanner({ conf, onAction }: { conf: ConfidenceE
       </div>
       <div className="mt-3 flex items-center justify-between">
         <div className="text-xs text-muted">This explains why confidence is not High yet.</div>
-        <button className="text-sm font-semibold text-text underline underline-offset-4 hover:opacity-90" onClick={onAction}>
-          {conf.nextAction} ▶
+        <button className="flex items-center gap-2 text-sm font-semibold text-text underline underline-offset-4 hover:opacity-90" onClick={onAction}>
+          {conf.nextAction}
+          <ChevronRight className="h-4 w-4 text-text flex-shrink-0" />
         </button>
       </div>
     </div>

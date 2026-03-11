@@ -23,7 +23,7 @@ const EvidenceViewer: React.FC<EvidenceViewerProps> = ({
   return (
     <div className="flex h-full flex-col rounded-xl border border-border bg-panel p-5">
       <div className="flex items-center justify-between border-b border-border pb-4">
-        <div className="text-sm font-semibold text-text">Evidence Viewer</div>
+        <div className="text-xl font-semibold text-text pb-3">Evidence Viewer</div>
         <Monitor className="h-5 w-5 text-slate-400" />
       </div>
 

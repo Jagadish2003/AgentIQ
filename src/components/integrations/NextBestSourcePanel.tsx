@@ -17,7 +17,7 @@ export default function NextBestSourcePanel({
 }: { confidence: Confidence; recommendedConnectedCount: number; recommendedTotal: number; next: Connector | null; onConnectNext: ()=>void }) {
   return (
     <div className="mt-3 rounded-xl border border-border bg-panel p-4">
-      <div className="text-sm font-semibold text-text">Confidence</div>
+      <div className="text-xl font-semibold text-text">Confidence</div>
       <div className="mt-2 flex items-center justify-between">
         <Step label="Low" active={confidence==='LOW'} />
         <div className="mx-2 h-px flex-1 bg-border" />

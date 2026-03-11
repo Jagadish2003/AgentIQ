@@ -18,10 +18,9 @@ export default function HeroConnectorSection({
   return (
     <div>
       <div className="mb-4">
-        <div className="text-sm font-semibold text-text">Start here (fastest to value)</div>
-        <div className="text-xs text-muted">Connect at least 1 source to start discovery.</div>
+        <div className="text-xl font-semibold text-text">Start here (fastest to value)</div>
+        <div className="text-xs text-muted pb-3 pt-3">Connect at least 1 source to start discovery.</div>
       </div>
-
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {connectors.map((c) => (
           <HeroConnectorCard

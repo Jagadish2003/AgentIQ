@@ -55,7 +55,7 @@ export default function ConnectorTile({
       <div className="mt-2">
         <Button
           variant={isConnected ? 'secondary' : 'primary'}
-          className="w-full"
+          className={`w-full ${isConnected ? '!border-[#00B4B4]/50 !text-[#00B4B4]' : ''}`}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
             onPrimary();

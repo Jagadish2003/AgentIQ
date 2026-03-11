@@ -25,7 +25,7 @@ export default function ConnectorDetailPanel({
     <div className="rounded-xl border border-border bg-panel p-5">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <div className="text-base font-semibold text-text">{connector.name} Integration</div>
+          <div className="text-xl font-semibold text-text">{connector.name} Integration</div>
           <div className="mt-1 text-sm text-muted">{connector.category}</div>
         </div>
 

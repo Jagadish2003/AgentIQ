@@ -11,7 +11,7 @@ function icon(status: string) {
 export default function PipelineStepper({ steps }: { steps: RunStep[] }) {
   return (
     <div className="flex flex-col rounded-xl border border-border bg-panel p-5" style={{ minHeight: '100%' }}>
-      <div className="mb-4 text-sm font-semibold text-text">Pipeline Progress</div>
+      <div className="mb-4 text-xl font-semibold text-text">Pipeline Progress</div>
       <div className="flex flex-1 flex-col justify-between gap-1">
         {steps.map((s) => (
           <div

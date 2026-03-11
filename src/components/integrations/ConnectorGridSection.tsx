@@ -17,8 +17,8 @@ export default function ConnectorGridSection({
 }) {
   return (
     <div className="mt-1 pb-2">
-      <div className="text-sm font-semibold text-text">Add more coverage</div>
-      <div className="text-xs text-muted">Add sources to improve confidence and evidence coverage.</div>
+      <div className="text-xl font-semibold text-text">Add more coverage</div>
+      <div className="text-xs text-muted pb-3 pt-3">Add sources to improve confidence and evidence coverage.</div>
 
       <div className="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-3">
         {connectors.map((c) => (

@@ -49,7 +49,7 @@ export default function RunSummaryPanel({
 
   return (
     <div className="rounded-xl border border-border bg-panel p-4">
-      <div className="text-sm font-semibold text-text">Run Summary</div>
+      <div className="text-xl font-semibold text-text">Run Summary</div>
 
       <div className="mt-3 rounded-lg border border-border bg-bg/20 p-3">
         <div className="text-xs font-semibold text-text">Sources Feeding Discovery Run</div>

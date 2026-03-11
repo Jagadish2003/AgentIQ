@@ -19,7 +19,6 @@ export default function HeroConnectorCard({
   onSecondary: () => void;
 }) {
   const isConnected = connector.status === 'connected';
-
   const primaryLabel =
     isConnected ? 'Configure & Sync' : connector.status === 'coming_soon' ? 'Coming soon' : 'Connect';
 
@@ -38,13 +37,10 @@ export default function HeroConnectorCard({
             {connectorIcons[connector.name] || <Settings size={18} className="text-slate-500" />}
             <span className="truncate">{connector.name}</span>
           </div>
-
           <div className="mt-1 truncate text-sm text-muted">{connector.category}</div>
         </div>
-
         <Badge status={connector.status} />
       </div>
-
       <div className="mt-4 grid grid-cols-2 gap-4">
         {connector.metrics.slice(0, 2).map((m) => (
           <div key={m.label} className="min-w-0 rounded-lg border border-border bg-bg/30 p-3">
@@ -53,17 +49,14 @@ export default function HeroConnectorCard({
           </div>
         ))}
       </div>
-
       <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
         <div className="truncate">
           Last synced: <span className="text-text">{isConnected ? connector.lastSynced : '—'}</span>
         </div>
-
         <div>
           Signal: <span className="text-text">{connector.signalStrength}</span>
         </div>
       </div>
-
       <div className="mt-5 flex flex-wrap gap-3">
         <Button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -76,14 +69,13 @@ export default function HeroConnectorCard({
         >
           {primaryLabel}
         </Button>
-
         <Button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
             onSecondary();
           }}
           variant="secondary"
-          className="min-w-[120px] flex-1"
+          className={`min-w-[120px] flex-1 ${isConnected ? '!border-[#00B4B4]/50 !text-[#00B4B4]' : ''}`}
           disabled={!isConnected}
           title={!isConnected ? 'Connect to enable data preview' : undefined}
         >

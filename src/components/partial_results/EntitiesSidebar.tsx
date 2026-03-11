@@ -28,27 +28,25 @@ export default function EntitiesSidebar({
 
   return (
     <div className="rounded-xl border border-border bg-panel p-4">
-      <div className="text-sm font-semibold text-text">Extracted Entities</div>
-
+      <div className="text-xl font-semibold text-text pb-3">Extracted Entities</div>
       <div className="relative">
         <input
           value={query}
           onChange={(e) => onQuery(e.target.value)}
           placeholder="Search entities…"
-          className="w-full rounded-md border border-border bg-bg/30 px-3 py-2 pr-10 text-sm text-text placeholder:text-muted hover:bg-bg/50 hover:border-accent/50 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/50 appearance-none"
+          className="w-full rounded-md border border-border bg-bg/50 px-3 py-2 pr-10 text-sm text-text placeholder:text-muted hover:border-[#00B4B4]/50 transition-colors focus:outline-none focus:border-[#00B4B4] focus:ring-2 focus:ring-[#00B4B4]/50 appearance-none"
         />
         <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted pointer-events-none" />
       </div>
-
       <div className="mt-4">
         <div className="text-xs font-semibold text-text">Type</div>
         <div className="mt-2 space-y-2 text-sm text-muted">
           {typeList.map((t) => (
-            <label key={t} className="flex items-center justify-between gap-2">
+            <label key={t} className="flex items-center justify-between gap-2 cursor-pointer">
               <span className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  className="accent-blue-500"
+                  className="accent-[#00B4B4]"
                   checked={enabledTypes[t]}
                   onChange={(e) => onTypeToggle(t, e.target.checked)}
                 />
@@ -59,14 +57,12 @@ export default function EntitiesSidebar({
           ))}
         </div>
       </div>
-
       <div className="mt-4 flex items-center justify-between">
         <div className="text-xs font-semibold text-text">Top Entities</div>
         <Button variant="ghost" onClick={onClear} className="text-xs">
           Clear
         </Button>
       </div>
-
       <div className="mt-2 space-y-2">
         {entities.slice(0, 12).map((e) => {
           const selected = selectedEntityIds.includes(e.id);

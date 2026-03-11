@@ -20,14 +20,14 @@ export default function RunLogPanel({
   return (
     <div className="rounded-xl border border-border bg-panel p-4">
       <div className="flex items-center justify-between">
-        <div className="text-sm font-semibold text-text">Live Run Log</div>
+        <div className="text-xl font-semibold text-text">Live Run Log</div>
         <label className="flex items-center gap-2 text-xs text-muted">
-          <input
-            type="checkbox"
-            className="accent-blue-500"
-            checked={autoScroll}
-            onChange={(e) => onToggleAutoScroll(e.target.checked)}
-          />
+         <input
+          type="checkbox"
+          className="accent-[#00B4B4]"
+          checked={autoScroll}
+          onChange={(e) => onToggleAutoScroll(e.target.checked)}
+        />
           Auto-scroll
         </label>
       </div>

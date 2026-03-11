@@ -1,4 +1,5 @@
 import React from 'react';
+import { Check, ChevronDown } from 'lucide-react';
 import { useNormalizationContext } from '../../context/NormalizationContext';
 
 export default function FieldDetailsPanel() {
@@ -6,54 +7,68 @@ export default function FieldDetailsPanel() {
 
   return (
     <div className="rounded-xl border border-border bg-panel p-4 h-full flex flex-col">
-      <div className="text-sm font-semibold text-text">Field Details</div>
+      <div className="text-sm font-semibold text-text mb-3">Field Details</div>
+
       {!selectedRow ? (
-        <div className="mt-3 text-sm text-muted">Select a row to view details.</div>
+        <div className="text-sm text-muted">Select a row to view details.</div>
       ) : (
         <>
-          <div className="mt-3 text-sm font-semibold text-text">
+          <div className="text-sm font-semibold text-text">
             {selectedRow.sourceSystem}.{selectedRow.sourceField}
           </div>
+
           <div className="mt-1 text-xs text-muted">
             Source: {selectedRow.sourceSystem} · {selectedRow.sourceType}
           </div>
-          <div className="mt-3 rounded-lg border border-border bg-bg/20 p-3">
-            <div className="text-xs font-semibold text-text">Mapped to</div>
-            <div className="mt-1 text-sm text-text">{selectedRow.commonField}</div>
-            {selectedRow.notes && (
-              <div className="mt-2 text-xs text-muted">{selectedRow.notes}</div>
-            )}
+
+          <div className="mt-4 rounded-lg border border-border bg-bg/20 px-3 py-2">
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <div className="truncate text-sm text-text">{selectedRow.commonField}</div>
+                {selectedRow.notes && (
+                  <div className="mt-1 text-xs text-muted">{selectedRow.notes}</div>
+                )}
+              </div>
+              <ChevronDown size={14} className="text-muted" />
+            </div>
           </div>
-          <div className="mt-3 rounded-lg border border-border bg-bg/20 p-3">
-            <div className="text-xs font-semibold text-text">Sample values</div>
-            <div className="mt-2 space-y-1 text-sm text-muted">
-              {selectedRow.sampleValues.map((v, i) => (
-                <div key={i}>• {v}</div>
+
+          <div className="mt-4 rounded-lg border border-border bg-bg/20 p-3">
+            <div className="mb-2 text-xs font-semibold text-muted">Sample values:</div>
+            <div className="space-y-1 text-sm text-text">
+              {selectedRow.sampleValues.map((value, index) => (
+                <div key={index}>{value}</div>
               ))}
             </div>
           </div>
+
           <div className="mt-4 rounded-lg border border-border bg-bg/20 p-3">
             <div className="flex items-center justify-between">
-              <div className="text-xs font-semibold text-text">Required Permissions</div>
-              <div className="text-xs text-muted">Pilot risk often = access</div>
+              <div className="text-xs font-semibold text-muted">Required Permissions</div>
+              <span className="text-xs text-muted underline cursor-pointer">Learn more</span>
             </div>
+
             {relevantPermissions.length === 0 ? (
-              <div className="mt-2 text-sm text-muted">
-                No permissions defined for this source yet.
-              </div>
+              <div className="mt-3 text-sm text-muted">No permissions defined for this source yet.</div>
             ) : (
-              <div className="mt-2 space-y-2 text-sm text-muted">
-                {relevantPermissions.map((p) => (
-                  <div key={p.id} className="flex items-center justify-between">
-                    <span>{p.label}</span>
-                    <span className={`text-xs ${p.satisfied ? 'text-emerald-300' : 'text-amber-200'}`}>
-                      {p.satisfied ? 'Granted' : 'Missing'}
-                    </span>
+              <div className="mt-2 border-t border-border pt-3 space-y-3">
+                {relevantPermissions.map((permission) => (
+                  <div
+                    key={permission.id}
+                    className="flex items-center gap-3 text-sm text-text"
+                  >
+                    <div className="flex h-5 w-5 items-center justify-center rounded-sm border-2 border-border bg-panel">
+                      {permission.satisfied && (
+                        <Check size={14} strokeWidth={3} className="text-white" />
+                      )}
+                    </div>
+                    <span>{permission.label}</span>
                   </div>
                 ))}
               </div>
             )}
           </div>
+
           <div className="flex-1" />
         </>
       )}
