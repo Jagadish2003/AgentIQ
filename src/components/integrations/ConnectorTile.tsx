@@ -17,8 +17,7 @@ export default function ConnectorTile({
   onPrimary: () => void;
 }) {
   const isConnected = connector.status === 'connected';
-  const isComingSoon = connector.status === 'coming_soon';
-  const actionLabel = isComingSoon ? 'Coming soon' : isConnected ? 'View data' : 'Connect';
+  const actionLabel = isConnected ? 'View data' : 'Connect';
 
   return (
     <div
@@ -35,10 +34,8 @@ export default function ConnectorTile({
           </div>
           <div className="mt-0.5 truncate text-xs text-muted">{connector.category}</div>
         </div>
-
         <Badge status={connector.status} />
       </div>
-
       <div className="mt-2 flex flex-wrap gap-1">
         {connector.reads.slice(0, 2).map((r) => (
           <span
@@ -49,14 +46,12 @@ export default function ConnectorTile({
           </span>
         ))}
       </div>
-
       <div className="mt-2 flex items-center justify-between text-xs text-muted">
         <span>
           Signal: <span className="text-text">{connector.signalStrength}</span>
         </span>
         <span>{isConnected ? `Synced ${connector.lastSynced}` : '—'}</span>
       </div>
-
       <div className="mt-2">
         <Button
           variant={isConnected ? 'secondary' : 'primary'}
@@ -65,7 +60,6 @@ export default function ConnectorTile({
             e.stopPropagation();
             onPrimary();
           }}
-          disabled={isComingSoon}
         >
           {actionLabel}
         </Button>

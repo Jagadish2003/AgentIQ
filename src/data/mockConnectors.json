@@ -172,54 +172,6 @@
         "Notebooks"
       ],
       "signalStrength": 52
-    },
-    {
-      "id": "veeva_qms",
-      "name": "Veeva QMS",
-      "category": "Quality \u00b7 Regulated",
-      "tier": "coming_soon",
-      "status": "coming_soon",
-      "metrics": [
-        {
-          "label": "Deviations",
-          "value": "\u2014"
-        },
-        {
-          "label": "Change Controls",
-          "value": "\u2014"
-        }
-      ],
-      "lastSynced": "\u2014",
-      "reads": [
-        "Deviations",
-        "Change Control",
-        "Doc Review"
-      ],
-      "signalStrength": 0
-    },
-    {
-      "id": "mes_system",
-      "name": "MES System",
-      "category": "Manufacturing \u00b7 Ops",
-      "tier": "coming_soon",
-      "status": "coming_soon",
-      "metrics": [
-        {
-          "label": "Overrides",
-          "value": "\u2014"
-        },
-        {
-          "label": "Rework Events",
-          "value": "\u2014"
-        }
-      ],
-      "lastSynced": "\u2014",
-      "reads": [
-        "Manual Overrides",
-        "Rework",
-        "Audit Trails"
-      ],
-      "signalStrength": 0
     }
   ]
 }
