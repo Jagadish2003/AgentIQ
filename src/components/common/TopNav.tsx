@@ -8,6 +8,7 @@ const items = [
   { to: '/discovery-run', label: 'Discovery Run' },
   { to: '/normalization', label: 'Normalization' },
   { to: '/partial-results', label: 'Partial Results' },
+  { to: '/analyst-review', label: 'Analyst Review' },
   { to: '/reports', label: 'Reports' }
 ];
 

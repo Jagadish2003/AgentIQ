@@ -6,12 +6,14 @@ import { DiscoveryRunProvider } from './context/DiscoveryRunContext';
 import { PartialResultsProvider } from './context/PartialResultsContext';
 import { NormalizationProvider } from './context/NormalizationContext';
 import { ToastProvider } from './components/common/Toast';
+import { AnalystReviewProvider } from './context/AnalystReviewContext';
 
 import IntegrationHubPage from './pages/IntegrationHubPage';
 import SourceIntakePage from './pages/SourceIntakePage';
 import DiscoveryRunPage from './pages/DiscoveryRunPage';
 import PartialResultsPage from './pages/PartialResultsPage';
 import NormalizationInspectorPage from './pages/NormalizationInspectorPage';
+import AnalystReviewPage from './pages/AnalystReviewPage';
 
 export default function App() {
   return (
@@ -21,6 +23,7 @@ export default function App() {
           <DiscoveryRunProvider>
             <PartialResultsProvider>
               <NormalizationProvider>
+                <AnalystReviewProvider>
                 <Routes>
                   <Route path="/" element={<Navigate to="/integration-hub" replace />} />
                   <Route path="/integration-hub" element={<IntegrationHubPage />} />
@@ -28,9 +31,11 @@ export default function App() {
                   <Route path="/discovery-run" element={<DiscoveryRunPage />} />
                   <Route path="/partial-results" element={<PartialResultsPage />} />
                   <Route path="/normalization" element={<NormalizationInspectorPage />} />
+                  <Route path="/analyst-review" element={<AnalystReviewPage />} />
                   <Route path="/reports" element={<div className="min-h-screen text-text p-6">Reports (placeholder)</div>} />
                   <Route path="*" element={<Navigate to="/integration-hub" replace />} />
                 </Routes>
+                </AnalystReviewProvider>
               </NormalizationProvider>
             </PartialResultsProvider>
           </DiscoveryRunProvider>
