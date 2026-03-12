@@ -28,10 +28,7 @@ export default function NormalizationInspectorPage() {
         <ConfidenceBanner conf={confidence} onAction={() => nav('/integration-hub')} />
 
         <div className="mt-4 flex gap-6">
-          {/* ── Left + Middle columns ── */}
           <div className="flex flex-col gap-4" style={{ flex: 3 }}>
-
-            {/* Fixed-height row so panels never shrink when rows are few */}
             <div className="flex gap-6" style={{ height: '700px' }}>
               <div className="flex flex-col" style={{ flex: 1 }}>
                 <SourcesEntitiesPanel />
@@ -41,8 +38,6 @@ export default function NormalizationInspectorPage() {
                 <MappingTable />
               </div>
             </div>
-
-            {/* Summary bar */}
             <div className="flex items-center gap-8 rounded-xl border border-border bg-panel px-6 py-3 text-sm">
               <div className="flex items-center gap-2">
                 <span className="h-2.5 w-2.5 rounded-sm bg-[#00B4B4]" />
@@ -66,8 +61,6 @@ export default function NormalizationInspectorPage() {
               </div>
             </div>
           </div>
-
-          {/* ── Right column (Field Details) ── */}
           <div className="flex flex-col" style={{ flex: 1 }}>
             <FieldDetailsPanel />
           </div>

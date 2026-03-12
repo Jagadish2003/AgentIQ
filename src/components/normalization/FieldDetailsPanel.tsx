@@ -7,7 +7,7 @@ export default function FieldDetailsPanel() {
 
   return (
     <div className="rounded-xl border border-border bg-panel p-4 h-full flex flex-col">
-      <div className="text-sm font-semibold text-text mb-3">Field Details</div>
+      <div className="text-xl font-semibold text-text mb-3">Field Details</div>
 
       {!selectedRow ? (
         <div className="text-sm text-muted">Select a row to view details.</div>

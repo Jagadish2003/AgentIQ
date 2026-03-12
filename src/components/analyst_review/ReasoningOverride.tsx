@@ -28,7 +28,7 @@ export default function ReasoningOverride({
 
       {/* Header */}
       <div className="px-4 py-3 border-b border-border">
-        <div className="text-sm font-semibold text-text">Reasoning Override</div>
+        <div className="text-xl font-semibold text-text">Reasoning Override</div>
       </div>
 
       {/* Scrollable body — flex col so textarea can grow and lock stays pinned */}

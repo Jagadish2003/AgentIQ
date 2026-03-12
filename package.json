@@ -1,7 +1,7 @@
 {
-  "name": "agentiq-screens1-5",
+  "name": "agentiq",
   "private": true,
-  "version": "0.5.1-screen5fix",
+  "version": "v11.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

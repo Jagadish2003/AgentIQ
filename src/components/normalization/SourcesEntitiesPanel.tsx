@@ -93,7 +93,7 @@ export default function SourcesEntitiesPanel() {
   return (
     <div className="rounded-xl border border-border bg-panel p-4 h-full flex flex-col gap-3">
 
-      <div className="text-sm font-semibold text-text">Sources &amp; Entities</div>
+      <div className="text-xl font-semibold text-text">Sources &amp; Entities</div>
 
       {/* Search */}
       <div className="relative">
@@ -132,7 +132,7 @@ export default function SourcesEntitiesPanel() {
             >
               <span className="flex items-center gap-2 min-w-0">
                 <input
-                  type="checkbox"
+                  type="checkbox" title="toggle"
                   className="accent-blue-500 cursor-pointer"
                   checked={selected}
                   onChange={() => toggleSource(source.name)}
@@ -190,7 +190,7 @@ export default function SourcesEntitiesPanel() {
                 >
                   <span className="flex items-center gap-2 flex-1 min-w-0">
                     <input
-                      type="checkbox"
+                      type="checkbox" title="toggle"
                       className="accent-blue-500 cursor-pointer"
                       checked={selected}
                       onChange={() => toggleEntity(entity.name)}
