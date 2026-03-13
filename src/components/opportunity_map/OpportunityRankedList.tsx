@@ -32,7 +32,7 @@ export default function OpportunityRankedList({
         <div className="text-xl font-semibold text-text pb-2">Opportunity List</div>
         <div className="text-xs text-muted">Ranked</div>
       </div>
-      <div className="mt-3 overflow-auto space-y-2 max-h-[647px]">
+      <div className="mt-3 overflow-auto space-y-2 max-h-[668px]">
         {ranked.length === 0 ? (
           <div className="text-sm text-muted">No opportunities match the current filters.</div>
         ) : (
