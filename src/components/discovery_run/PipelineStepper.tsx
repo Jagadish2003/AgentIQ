@@ -32,11 +32,12 @@ export default function PipelineStepper({ steps }: { steps: RunStep[] }) {
               >
                 {icon(s.status)}
               </div>
+
               <div className="min-w-0">
                 <div className="truncate text-sm font-semibold text-text">{s.label}</div>
-                <div className="mt-0.5 text-xs text-muted">{s.status}</div>
               </div>
             </div>
+
             <div
               className={`shrink-0 rounded-md border px-2.5 py-1 text-xs font-medium ${
                 s.status === 'DONE'

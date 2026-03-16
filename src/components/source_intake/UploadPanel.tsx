@@ -81,7 +81,7 @@ export default function UploadPanel({
 
       <button
         onClick={onUploadFolder}
-        className="mt-5 flex w-full items-center justify-center gap-2 rounded-md border border-border bg-panel/40 py-2.5 text-sm text-text transition-colors hover:bg-panel"
+        className="mt-5 flex w-full items-center justify-center gap-2 rounded-md border border-border bg-bg/20 py-2.5 text-sm text-text transition-colors hover:bg-panel/40"
       >
         <FolderPlus size={16} />
         Upload a folder of CSV/Excel files

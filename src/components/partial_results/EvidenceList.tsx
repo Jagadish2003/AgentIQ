@@ -157,13 +157,13 @@ export default function EvidenceList({
         })}
       </div>
 
-      <div className="mt-3 flex items-center justify-between text-xs text-muted">
-        <Button variant="secondary" onClick={onPrev} disabled={evidence.length === 0}>
-          <ChevronLeft className="h-4 w-4" />
+      <div className="mt-3 flex items-center justify-between text-xs text-muted ">
+        <Button variant="secondary" onClick={onPrev} disabled={evidence.length === 0} className='border-border bg-bg/40 px-4 py-2 text-sm font-medium text-text transition-colors hover:bg-bg/60 disabled:cursor-not-allowed disabled:opacity-40'>
+          <ChevronLeft className="h-4 w-4 " />
           Prev
         </Button>
         <span>{positionLabel}</span>
-        <Button variant="secondary" onClick={onNext} disabled={evidence.length === 0}>
+        <Button variant="secondary" onClick={onNext} disabled={evidence.length === 0} className='border-border bg-bg/40 px-4 py-2 text-sm font-medium text-text transition-colors hover:bg-bg/60 disabled:cursor-not-allowed disabled:opacity-40'>
           Next
           <ChevronRight className="h-4 w-4" />
         </Button>

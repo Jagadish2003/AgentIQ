@@ -79,7 +79,7 @@ export default function OpportunityDetails({
             </button>
             <button
               onClick={onGoToReview}
-              className="rounded-md border border-[#00B4B4]/50 bg-[#00B4B4]/10 px-3 py-2 text-sm text-[#00B4B4] hover:bg-[#00B4B4]/20 transition-colors"
+             className="rounded-md border border-border bg-bg/20 px-3 py-2 text-sm text-text hover:bg-panel2 hover:border-[#00B4B4]/40 transition-colors"
             >
               Go to Review
             </button>
