@@ -36,16 +36,21 @@ function ConfidenceBars({ level }: { level: string }) {
 export default function RunSummaryPanel({
   run,
   onViewPartial,
+  onViewNormalization,
   onDownload,
   onRestart
 }: {
   run: DiscoveryRun;
   onViewPartial: () => void;
+  onViewNormalization: () => void;
   onDownload: () => void;
   onRestart: () => void;
 }) {
   const canViewPartial = run.progress.percent >= 42;
   const canDownload = run.status === 'COMPLETED';
+
+  const normalizationStep = run.steps.find((step) => step.id === 'normalize');
+  const canViewNormalization = normalizationStep?.status !== 'PENDING';
 
   return (
     <div className="rounded-xl border border-border bg-panel p-4">
@@ -76,6 +81,16 @@ export default function RunSummaryPanel({
       </div>
 
       <div className="mt-4 space-y-2">
+        <Button
+          className="w-full"
+          variant="secondary"
+          onClick={onViewNormalization}
+          disabled={!canViewNormalization}
+          title={!canViewNormalization ? 'Available after Normalization starts' : undefined}
+        >
+          Normalization
+        </Button>
+
         <Button
           className="w-full"
           variant="secondary"

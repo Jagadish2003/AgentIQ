@@ -48,6 +48,7 @@ export default function TopNav() {
               </React.Fragment>
             );
           })}
+
           <span className="h-4 w-px bg-muted/30 mx-1" />
 
           <button
@@ -56,11 +57,13 @@ export default function TopNav() {
             Administrator
             <ChevronDown size={14} strokeWidth={2.5} className="text-slate-400" />
           </button>
-          <span className="h-4 w-px bg-muted/30 mx-1" />
+
+
           <div className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-panel2 hover:text-text">
             <User className="h-4 w-4 text-slate-400" />
           </div>
         </div>
+
       </div>
     </div>
   );

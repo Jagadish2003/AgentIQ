@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Search } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronDown, Search } from 'lucide-react';
 import Button from '../common/Button';
 import { EvidenceReview } from '../../types/partialResults';
 
@@ -159,16 +159,17 @@ export default function EvidenceList({
 
       <div className="mt-3 flex items-center justify-between text-xs text-muted">
         <Button variant="secondary" onClick={onPrev} disabled={evidence.length === 0}>
+          <ChevronLeft className="h-4 w-4" />
           Prev
         </Button>
         <span>{positionLabel}</span>
         <Button variant="secondary" onClick={onNext} disabled={evidence.length === 0}>
           Next
+          <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
 
       <div className="mt-2 text-xs text-muted">
-        Pagination is item-based for Sprint 1 (list paging in Sprint 2).{' '}
         <button className="underline" onClick={onPaginationToast}>
           Learn more
         </button>

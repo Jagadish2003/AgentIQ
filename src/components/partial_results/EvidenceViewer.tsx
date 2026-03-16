@@ -57,32 +57,56 @@ const EvidenceViewer: React.FC<EvidenceViewerProps> = ({
             <span className="rounded border border-border bg-bg/30 px-2 py-1">Decision: {evidence.decision}</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2">
             <button
               onClick={onApprove}
-              className="w-full rounded-lg bg-[#18A4A6] py-2 text-sm font-medium text-white transition hover:bg-[#159395]"
+              className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all
+                ${evidence.decision === 'APPROVED'
+                  ? 'bg-emerald-500/20 border-emerald-500/60 text-emerald-300'
+                  : 'bg-emerald-500/5 border-emerald-500/25 text-emerald-100 hover:bg-emerald-500/15 hover:border-emerald-500/50 hover:text-emerald-300'
+                }`}
             >
-              Approve
+              {evidence.decision === 'APPROVED' ? (
+                <>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Approved
+                </>
+              ) : (
+                <>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Approve
+                </>
+              )}
             </button>
-            <Button variant="secondary" onClick={onReject}>
-              Reject
-            </Button>
-          </div>
 
-          <div className="flex items-center justify-between border-t border-border pt-3 text-xs text-muted">
-            <span>{'<<'}</span>
-            <span>{positionLabel}</span>
-            <span>{'>>'}</span>
-          </div>
-
-          <div className="flex items-center justify-between border-t border-border pt-3">
-            <Button variant="secondary" onClick={onPrev}>
-              Prev
-            </Button>
-            <span className="text-xs text-muted">{positionLabel}</span>
-            <Button variant="secondary" onClick={onNext}>
-              Next
-            </Button>
+            <button
+              onClick={onReject}
+              className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all
+                ${evidence.decision === 'REJECTED'
+                  ? 'bg-red-500/20 border-red-500/60 text-red-300'
+                  : 'bg-red-500/5 border-red-500/25 text-red-100 hover:bg-red-500/15 hover:border-red-500/50 hover:text-red-300'
+                }`}
+            >
+              {evidence.decision === 'REJECTED' ? (
+                <>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  Rejected
+                </>
+              ) : (
+                <>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  Reject
+                </>
+              )}
+            </button>
           </div>
         </div>
       )}

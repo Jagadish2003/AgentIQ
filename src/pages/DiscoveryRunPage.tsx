@@ -66,6 +66,7 @@ export default function DiscoveryRunPage() {
           <RunSummaryPanel
             run={run}
             onViewPartial={() => nav('/partial-results')}
+            onViewNormalization={() => nav('/normalization')}
             onDownload={() => {}}
             onRestart={() => restartRun()}
           />

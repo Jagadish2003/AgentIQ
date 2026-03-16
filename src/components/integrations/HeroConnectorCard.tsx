@@ -26,10 +26,10 @@ export default function HeroConnectorCard({
     <div
       onClick={onSelect}
       className={`
-        flex min-h-[240px] min-w-0 cursor-pointer flex-col justify-between overflow-hidden rounded-xl border
-        ${selected ? 'border-accent/60 bg-panel2' : 'border-border bg-panel'}
-        p-5 shadow-sm hover:bg-panel2
-      `}
+      flex min-h-[240px] min-w-0 cursor-pointer flex-col justify-between overflow-hidden rounded-xl border-2
+      ${selected ? 'border-accent bg-panel2' : 'border-border bg-panel'}
+      p-5 shadow-sm hover:border-accent/40 hover:bg-panel2
+    `}
     >
       <div className="flex min-w-0 items-start justify-between gap-3">
         <div className="min-w-0">

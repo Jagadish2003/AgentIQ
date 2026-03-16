@@ -22,9 +22,9 @@ export default function ConnectorTile({
   return (
     <div
       onClick={onSelect}
-      className={`h-[140px] cursor-pointer rounded-xl border ${
-        selected ? 'border-accent/60 bg-panel2' : 'border-border bg-panel'
-      } p-3 hover:bg-panel2`}
+      className={`h-[140px] cursor-pointer rounded-xl border-2 ${
+        selected ? 'border-accent bg-panel2' : 'border-border bg-panel'
+      } p-3 hover:border-accent/60 hover:bg-panel2`}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
