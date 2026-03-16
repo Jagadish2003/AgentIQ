@@ -10,6 +10,7 @@ const items = [
   { to: '/partial-results', label: 'Partial Results' },
   { to: '/analyst-review', label: 'Analyst Review' },
   { to: '/opportunity-map', label: 'Opportunity Map' },
+  { to: '/pilot-roadmap', label: 'Pilot Roadmap' },
   { to: '/reports', label: 'Reports' },
 ];
 

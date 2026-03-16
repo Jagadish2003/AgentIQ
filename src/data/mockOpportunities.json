@@ -153,7 +153,7 @@
       { "label": "Read SAP Workflow API (S)", "required": true, "satisfied": false },
       { "label": "View ServiceNow Changes (S)", "required": true, "satisfied": true }
     ],
-    "decision": "REJECTED",
+    "decision": "APPROVED",
     "override": {
       "isLocked": false,
       "rationaleOverride": "",
