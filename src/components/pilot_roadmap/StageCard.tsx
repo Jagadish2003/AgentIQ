@@ -1,14 +1,16 @@
 import React from 'react';
-import { RoadmapStage, RoadmapDependency } from '../../types/pilotRoadmap';
+import { useState } from 'react';
+import { RoadmapStage, RoadmapDependency, Readiness } from '../../types/pilotRoadmap';
 import { OpportunityCandidate, PermissionItem } from '../../types/analystReview';
 import { readinessFromPermission, stageReadiness } from '../../utils/buildRoadmap';
 import ReadinessPill from './ReadinessPill';
- 
+import { ChevronRight } from 'lucide-react';
+
 interface Props {
   stage: RoadmapStage;
   onOpenReview: (id: string) => void;
 }
- 
+
 function permRowStyle(p: PermissionItem) {
   const status = readinessFromPermission(p);
   const cls =
@@ -17,26 +19,53 @@ function permRowStyle(p: PermissionItem) {
                            'border-red-500/30    bg-red-500/10    text-red-200';
   return { status, cls };
 }
- 
+
+function countsFromStatuses<T extends { status: Readiness }>(items: T[]) {
+  return items.reduce(
+    (acc, item) => {
+      if (item.status === 'READY') acc.ready++;
+      if (item.status === 'PENDING') acc.pending++;
+      if (item.status === 'MISSING') acc.missing++;
+      return acc;
+    },
+    { ready: 0, pending: 0, missing: 0 }
+  );
+}
+
 export default function StageCard({ stage, onOpenReview }: Props) {
-  const required      = stage.requiredPermissions.filter(p => p.required);
-  const readyCount    = stage.requiredPermissions.filter(p => readinessFromPermission(p) === 'READY').length;
-  const pendingCount  = stage.requiredPermissions.filter(p => readinessFromPermission(p) === 'PENDING').length;
-  const missingCount  = required.filter(p => readinessFromPermission(p) === 'MISSING').length;
-  const gate          = stageReadiness(stage.requiredPermissions);
- 
-  const hasOppScroll  = stage.opportunities.length > 3;
+  const [showDependencies, setShowDependencies] = useState(false);
+
+  const required = stage.requiredPermissions.filter(p => p.required);
+  const readyCount = stage.requiredPermissions.filter(
+    p => readinessFromPermission(p) === 'READY'
+  ).length;
+  const pendingCount = stage.requiredPermissions.filter(
+    p => readinessFromPermission(p) === 'PENDING'
+  ).length;
+  const missingCount = required.filter(
+    p => readinessFromPermission(p) === 'MISSING'
+  ).length;
+  const gate = stageReadiness(stage.requiredPermissions);
+
+  const dependencyCounts = countsFromStatuses(stage.dependencies);
+
   const hasPermScroll = stage.requiredPermissions.length > 4;
- 
-  const scrollStyle = {
+  const hasDepsScroll = stage.dependencies.length > 3;
+
+  const permScrollStyle = {
     height: '180px',
     scrollbarWidth: 'thin' as const,
     scrollbarColor: '#9e9fa3 #132043',
   };
- 
+
+  const depsScrollStyle = {
+    height: '148px',
+    scrollbarWidth: 'thin' as const,
+    scrollbarColor: '#9e9fa3 #132043',
+  };
+
   return (
     <div className="rounded-xl border border-border bg-panel p-4 flex flex-col h-full">
- 
       <style>{`
         .opp-scroll::-webkit-scrollbar { width: 6px; }
         .opp-scroll::-webkit-scrollbar-track { background: #132043; border-radius: 6px; }
@@ -45,20 +74,17 @@ export default function StageCard({ stage, onOpenReview }: Props) {
         .opp-scroll::-webkit-scrollbar-button:start { background: #132043; height: 10px; display: block; }
         .opp-scroll::-webkit-scrollbar-button:end { background: #132043; height: 10px; display: block; }
       `}</style>
- 
+
       {/* Gate readiness */}
       <div className="flex items-center justify-between">
-        <div className="text-sm font-semibold text-text">Stage Readiness</div>
+        <div className="text-xl font-semibold text-text">Stage Readiness</div>
         <ReadinessPill status={gate} />
       </div>
- 
+
       {/* Opportunities */}
       <div className="mt-4 rounded-lg border border-border bg-bg/20 p-3">
         <div className="text-sm font-semibold text-text">Selected Opportunities</div>
-        <div
-          className={hasOppScroll ? 'opp-scroll mt-2 space-y-2 overflow-y-scroll pr-1' : 'mt-2 space-y-2'}
-          style={hasOppScroll ? scrollStyle : {}}
-        >
+        <div className="mt-2 min-h-[190px] max-h-[190px] space-y-2 overflow-y-auto pr-1">
           {stage.opportunities.length === 0 && (
             <div className="text-sm text-muted">No opportunities assigned to this stage yet.</div>
           )}
@@ -76,7 +102,7 @@ export default function StageCard({ stage, onOpenReview }: Props) {
           ))}
         </div>
       </div>
- 
+
       {/* Required Data Permissions */}
       <div className="mt-3 rounded-lg border border-border bg-bg/20 p-3">
         <div className="flex items-center justify-between">
@@ -87,7 +113,7 @@ export default function StageCard({ stage, onOpenReview }: Props) {
         </div>
         <div
           className={hasPermScroll ? 'opp-scroll mt-2 space-y-2 overflow-y-scroll pr-1' : 'mt-2 space-y-2'}
-          style={hasPermScroll ? scrollStyle : {}}
+          style={hasPermScroll ? permScrollStyle : {}}
         >
           {stage.requiredPermissions.map((p: PermissionItem, i: number) => {
             const { status, cls } = permRowStyle(p);
@@ -105,24 +131,44 @@ export default function StageCard({ stage, onOpenReview }: Props) {
           Required permissions drive gate readiness. Recommended permissions influence quality and confidence.
         </div>
       </div>
- 
+
       {/* Dependencies */}
-      <div className="mt-3 rounded-lg border border-border bg-bg/20 p-3 flex-1">
-        <div className="text-sm font-semibold text-text">Dependencies</div>
-        <div className="mt-2 space-y-2">
-          {stage.dependencies.map((d: RoadmapDependency) => (
-            <div
-              key={d.id}
-              className="flex items-center justify-between rounded-md border border-border bg-bg/10 px-3 py-2 text-sm"
-            >
-              <span className="text-text">{d.label}</span>
-              <ReadinessPill status={d.status} />
-            </div>
-          ))}
-        </div>
+      <div className="mt-3 rounded-lg border border-border bg-bg/20 p-3">
+        <button
+          className="flex w-full items-start justify-between gap-3 text-left"
+          onClick={() => setShowDependencies(!showDependencies)}
+        >
+          <span className="flex items-center gap-2 text-sm font-semibold text-text">
+            <ChevronRight
+              size={16}
+              className={`transition-transform duration-200 ${
+                showDependencies ? 'rotate-90' : ''
+              }`}
+            />
+            Dependencies
+          </span>
+          <span className="text-xs text-muted">
+            {dependencyCounts.ready} READY · {dependencyCounts.pending} PENDING · {dependencyCounts.missing} MISSING
+          </span>
+        </button>
+
+        {showDependencies && (
+          <div
+            className={hasDepsScroll ? 'opp-scroll mt-2 space-y-2 overflow-y-scroll pr-1' : 'mt-2 space-y-2'}
+            style={hasDepsScroll ? depsScrollStyle : {}}
+          >
+            {stage.dependencies.map((d: RoadmapDependency) => (
+              <div
+                key={d.id}
+                className="flex items-center justify-between rounded-md border border-border bg-bg/10 px-3 py-2 text-sm"
+              >
+                <span className="text-text">{d.label}</span>
+                <ReadinessPill status={d.status} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
- 
     </div>
   );
-} 
- 
+}
