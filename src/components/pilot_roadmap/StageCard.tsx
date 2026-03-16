@@ -31,6 +31,17 @@ function countsFromStatuses<T extends { status: Readiness }>(items: T[]) {
     { ready: 0, pending: 0, missing: 0 }
   );
 }
+function ReadinessCounts({ ready, pending, missing }: { ready: number; pending: number; missing: number }) {
+  return (
+    <span className="text-xs flex items-center gap-1">
+      <span className="font-semibold text-emerald-300">{ready} READY</span>
+      <span className="opacity-10">·</span>
+      <span className="font-semibold text-amber-300">{pending} PENDING</span>
+      <span className="opacity-10">·</span>
+      <span className="font-semibold text-red-300">{missing} MISSING</span>
+    </span>
+  );
+}
 
 export default function StageCard({ stage, onOpenReview }: Props) {
   const [showDependencies, setShowDependencies] = useState(false);
@@ -45,8 +56,8 @@ export default function StageCard({ stage, onOpenReview }: Props) {
   const missingCount = required.filter(
     p => readinessFromPermission(p) === 'MISSING'
   ).length;
-  const gate = stageReadiness(stage.requiredPermissions);
 
+  const gate = stageReadiness(stage.requiredPermissions);
   const dependencyCounts = countsFromStatuses(stage.dependencies);
 
   const hasPermScroll = stage.requiredPermissions.length > 4;
@@ -57,7 +68,6 @@ export default function StageCard({ stage, onOpenReview }: Props) {
     scrollbarWidth: 'thin' as const,
     scrollbarColor: '#9e9fa3 #132043',
   };
-
   const depsScrollStyle = {
     height: '148px',
     scrollbarWidth: 'thin' as const,
@@ -74,14 +84,11 @@ export default function StageCard({ stage, onOpenReview }: Props) {
         .opp-scroll::-webkit-scrollbar-button:start { background: #132043; height: 10px; display: block; }
         .opp-scroll::-webkit-scrollbar-button:end { background: #132043; height: 10px; display: block; }
       `}</style>
-
-      {/* Gate readiness */}
       <div className="flex items-center justify-between">
         <div className="text-xl font-semibold text-text">Stage Readiness</div>
         <ReadinessPill status={gate} />
       </div>
 
-      {/* Opportunities */}
       <div className="mt-4 rounded-lg border border-border bg-bg/20 p-3">
         <div className="text-sm font-semibold text-text">Selected Opportunities</div>
         <div className="mt-2 min-h-[190px] max-h-[190px] space-y-2 overflow-y-auto pr-1">
@@ -102,14 +109,10 @@ export default function StageCard({ stage, onOpenReview }: Props) {
           ))}
         </div>
       </div>
-
-      {/* Required Data Permissions */}
       <div className="mt-3 rounded-lg border border-border bg-bg/20 p-3">
         <div className="flex items-center justify-between">
           <div className="text-sm font-semibold text-text">Required Data Permissions</div>
-          <div className="text-xs text-muted">
-            {readyCount} READY · {pendingCount} PENDING · {missingCount} MISSING
-          </div>
+          <ReadinessCounts ready={readyCount} pending={pendingCount} missing={missingCount} />
         </div>
         <div
           className={hasPermScroll ? 'opp-scroll mt-2 space-y-2 overflow-y-scroll pr-1' : 'mt-2 space-y-2'}
@@ -131,8 +134,6 @@ export default function StageCard({ stage, onOpenReview }: Props) {
           Required permissions drive gate readiness. Recommended permissions influence quality and confidence.
         </div>
       </div>
-
-      {/* Dependencies */}
       <div className="mt-3 rounded-lg border border-border bg-bg/20 p-3">
         <button
           className="flex w-full items-start justify-between gap-3 text-left"
@@ -141,17 +142,16 @@ export default function StageCard({ stage, onOpenReview }: Props) {
           <span className="flex items-center gap-2 text-sm font-semibold text-text">
             <ChevronRight
               size={16}
-              className={`transition-transform duration-200 ${
-                showDependencies ? 'rotate-90' : ''
-              }`}
+              className={`transition-transform duration-200 ${showDependencies ? 'rotate-90' : ''}`}
             />
             Dependencies
           </span>
-          <span className="text-xs text-muted">
-            {dependencyCounts.ready} READY · {dependencyCounts.pending} PENDING · {dependencyCounts.missing} MISSING
-          </span>
+          <ReadinessCounts
+            ready={dependencyCounts.ready}
+            pending={dependencyCounts.pending}
+            missing={dependencyCounts.missing}
+          />
         </button>
-
         {showDependencies && (
           <div
             className={hasDepsScroll ? 'opp-scroll mt-2 space-y-2 overflow-y-scroll pr-1' : 'mt-2 space-y-2'}
