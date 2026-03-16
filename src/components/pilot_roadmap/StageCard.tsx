@@ -54,7 +54,7 @@ export default function StageCard({ stage, onOpenReview }: Props) {
  
       {/* Opportunities */}
       <div className="mt-4 rounded-lg border border-border bg-bg/20 p-3">
-        <div className="text-sm font-semibold text-text">Approved Opportunities</div>
+        <div className="text-sm font-semibold text-text">Selected Opportunities</div>
         <div
           className={hasOppScroll ? 'opp-scroll mt-2 space-y-2 overflow-y-scroll pr-1' : 'mt-2 space-y-2'}
           style={hasOppScroll ? scrollStyle : {}}
