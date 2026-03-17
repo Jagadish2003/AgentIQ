@@ -43,8 +43,11 @@ export default function ExecutiveReportPage() {
       <TopNav />
 
       <div className="w-full px-8 py-6 pb-10">
-        {/* Match PilotRoadmapHeader alignment */}
-        <div className="mb-3 flex items-start justify-between gap-3">
+
+        {/* ✅ HEADER */}
+        <div className="mb-3 flex items-start justify-between">
+          
+          {/* LEFT */}
           <div>
             <div className="text-2xl font-semibold">Executive Report</div>
             <div className="mt-1 text-sm text-muted">
@@ -52,18 +55,37 @@ export default function ExecutiveReportPage() {
             </div>
           </div>
 
-          <button
-            className="rounded-lg border border-border bg-panel2 px-4 py-2 text-sm font-medium text-text hover:bg-panel"
-            onClick={() => push('Export Report (stub)')}
-          >
-            Export Report
-          </button>
+          {/* RIGHT BUTTONS (FIXED) */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              className="rounded-lg border border-border bg-panel2 px-4 py-2 text-sm font-medium text-text hover:bg-panel"
+              onClick={() => push('Downloading PDF...')}
+            >
+              Download PDF
+            </button>
+
+            <button
+              className="rounded-lg border border-border bg-panel2 px-4 py-2 text-sm font-medium text-text hover:bg-panel"
+              onClick={() => push('Downloading PPTX...')}
+            >
+              Download PPTX
+            </button>
+
+            <button
+              className="rounded-lg border border-border bg-panel2 px-4 py-2 text-sm font-medium text-text hover:bg-panel"
+              onClick={() => push('Downloading XLSX...')}
+            >
+              Download XLSX
+            </button>
+          </div>
         </div>
 
+        {/* INFO BAR */}
         <div className="mb-4 rounded-xl bg-panel px-4 py-3 text-sm text-muted">
           Overview of confidence, sources, and prioritized quick wins across the roadmap.
         </div>
 
+        {/* STAT CARDS */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <StatCard title="Overall Confidence" value={roadmap.overallReadiness} />
           <StatCard title="Sources Analyzed" value={`${connectedCount} Connected`} />
@@ -71,6 +93,7 @@ export default function ExecutiveReportPage() {
           <StatCard title="Pilot Roadmap" value="30/60/90 Days" />
         </div>
 
+        {/* MAIN CONTENT */}
         <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[2fr_1fr]">
           <div className="space-y-4">
             <KeyInsights />
