@@ -22,12 +22,28 @@ export default function PilotRoadmapPage() {
   return (
     <div className="min-h-screen text-text">
       <TopNav />
+
+      {/* ✅ SAME GLOBAL LAYOUT SYSTEM */}
       <div className="w-full px-8 py-6 pb-10">
+
+        {/* ✅ HEADER */}
         <PilotRoadmapHeader
           onExport={() => push('Export will be wired in Screen 10 (stub).')}
         />
-        <RoadmapSummaryBar model={model} />
-        <StagesGrid stages={model.stages} onOpenReview={openReview} />
+
+        {/* ✅ SUMMARY BAR */}
+        <div className="mt-4">
+          <RoadmapSummaryBar model={model} />
+        </div>
+
+        {/* ✅ STAGES GRID */}
+        <div className="mt-6">
+          <StagesGrid
+            stages={model.stages}
+            onOpenReview={openReview}
+          />
+        </div>
+
       </div>
     </div>
   );

@@ -11,14 +11,11 @@ import TopQuickWins from '../components/executive_report/TopQuickWins';
 import PilotRoadmapHighlights from '../components/executive_report/PilotRoadmapHighlights';
 
 const SNAPSHOT_BUBBLES = [
-  // Quick Wins (4)
-  { x: 90,  y: 55,  r: 18 },
-  { x: 160, y: 75,  r: 14 },
-  { x: 240, y: 45,  r: 14 },
-  { x: 300, y: 85,  r: 14 },
-  // High Value (1)
-  { x: 460, y: 50,  r: 12 },
-  // Long Term (2)
+  { x: 90, y: 55, r: 18 },
+  { x: 160, y: 75, r: 14 },
+  { x: 240, y: 45, r: 14 },
+  { x: 300, y: 85, r: 14 },
+  { x: 460, y: 50, r: 12 },
   { x: 430, y: 150, r: 10 },
   { x: 520, y: 140, r: 10 },
 ];
@@ -38,7 +35,7 @@ export default function ExecutiveReportPage() {
   const blockerCount = useMemo(() => {
     const required = roadmap.stages.flatMap(s => s.requiredPermissions).filter(p => p.required);
     const missing = required.filter(p => !p.satisfied);
-    const uniq = new Map<string, boolean>();
+    const uniq = new Map();
     for (const p of missing) uniq.set(p.label, true);
     return uniq.size;
   }, [roadmap]);
@@ -54,53 +51,51 @@ export default function ExecutiveReportPage() {
   return (
     <div className="min-h-screen text-text">
       <TopNav />
-      <div className="mx-auto max-w-6xl px-4 py-6 pb-10">
 
-        {/* Header */}
-        <div className="mb-3 flex items-start justify-between gap-3">
+      {/* ✅ SAME CONTAINER AS PILOT ROADMAP */}
+      <div className="w-full px-8 py-6 pb-10">
+
+        {/* ✅ HEADER (MATCHED) */}
+        <div className="mb-4 flex items-center justify-between">
           <div>
-            <div className="text-2xl font-semibold">Executive Report</div>
-            <div className="mt-1 text-sm text-muted">
+            <h1 className="text-2xl font-semibold">Executive Report</h1>
+            <p className="mt-1 text-sm text-muted">
               Internal Demo Gate stub: exports are toasts; narrative is hardcoded.
-            </div>
+            </p>
           </div>
-          <div className="flex gap-2">
-            <button
-              className="rounded-md border border-border bg-bg/20 px-3 py-2 text-sm text-text hover:bg-panel2"
-              onClick={() => push('Download PDF (stub)')}
-            >
-              Download PDF
-            </button>
-            <button
-              className="rounded-md border border-border bg-bg/20 px-3 py-2 text-sm text-text hover:bg-panel2"
-              onClick={() => push('Download PPTX (stub)')}
-            >
-              Download PPTX
-            </button>
-            <button
-              className="rounded-md border border-border bg-bg/20 px-3 py-2 text-sm text-text hover:bg-panel2"
-              onClick={() => push('Download XLSX (stub)')}
-            >
-              Download XLSX
-            </button>
-          </div>
+
+          {/* 🔁 Same style as Pilot button */}
+          <button
+            className="rounded-md bg-panel px-4 py-2 text-sm text-text hover:bg-panel2"
+            onClick={() => push('Export Report (stub)')}
+          >
+            Export Report
+          </button>
         </div>
 
-        {/* Stat Cards */}
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
-          <StatCard title="Overall Confidence"  value={roadmap.overallReadiness} />
-          <StatCard title="Sources Analyzed"    value={`${connectedCount} Connected`} />
-          <StatCard title="Top Opportunities"   value={`${quickWins.length} Quick Wins`} />
-          <StatCard title="Pilot Roadmap"       value="30/60/90 Days" />
+        {/* ✅ INFO BAR (MATCHES PILOT STYLE) */}
+        <div className="mb-4 rounded-xl bg-panel px-4 py-3 text-sm text-muted">
+          Overview of confidence, sources, and prioritized quick wins across the roadmap.
         </div>
 
-        {/* Main Content */}
-        <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_360px]">
+        {/* ✅ STAT CARDS */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          <StatCard title="Overall Confidence" value={roadmap.overallReadiness} />
+          <StatCard title="Sources Analyzed" value={`${connectedCount} Connected`} />
+          <StatCard title="Top Opportunities" value={`${quickWins.length} Quick Wins`} />
+          <StatCard title="Pilot Roadmap" value="30/60/90 Days" />
+        </div>
+
+        {/* ✅ MAIN CONTENT */}
+        <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[2fr_1fr]">
+
+          {/* LEFT SIDE */}
           <div className="space-y-4">
             <KeyInsights />
             <SnapshotMatrix bubbles={SNAPSHOT_BUBBLES} />
           </div>
 
+          {/* RIGHT SIDE */}
           <div className="space-y-4">
             <TopQuickWins quickWins={quickWins} />
             <PilotRoadmapHighlights
@@ -109,6 +104,7 @@ export default function ExecutiveReportPage() {
               overallReadiness={roadmap.overallReadiness}
             />
           </div>
+
         </div>
 
       </div>
