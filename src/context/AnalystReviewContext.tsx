@@ -13,7 +13,7 @@ interface AnalystReviewContextValue {
   selectedId: string | null;
   selected: OpportunityCandidate | null;
   select: (id: string) => void;
-  setDecision: (d: Decision) => void;
+  setDecision: (d: Decision) => { ok: boolean; error?: string };
   setOverrideText: (v: string) => void;
   setOverrideReason: (v: string) => void;
   toggleLock: () => void;
@@ -45,9 +45,17 @@ export function AnalystReviewProvider({ children }: { children: React.ReactNode 
     setOpportunities(prev => prev.map(o => o.id === selectedId ? fn(o) : o));
   };
 
-  const setDecision = useCallback((d: Decision) => {
+  const setDecision = useCallback((d: Decision): { ok: boolean; error?: string } => {
+    if (!selected) return { ok: false, error: 'No opportunity selected' };
+
+    if (selected.decision !== 'UNREVIEWED') {
+      return { ok: false, error: "Decision finalized, can't revert" };
+    }
+
     updateSelected(o => ({ ...o, decision: d }));
     addAudit(`Opportunity ${d === 'APPROVED' ? 'Approved' : 'Rejected'}: ${selected?.title}`);
+
+    return { ok: true };
   }, [selectedId, selected]);
 
   const setOverrideText = useCallback((v: string) => {

@@ -112,12 +112,24 @@ export default function PartialResultsPage() {
             onPrev={() => goPrev()}
             onNext={() => goNext()}
             onApprove={() => {
-              approveSelected();
-              push('Approved. Moved to next unreviewed item.');
+              const confirmed = window.confirm(
+                'Are you sure you want to approve this item? Once confirmed, the decision cannot be changed.'
+              );
+              if (!confirmed) return;
+
+              const ok = approveSelected();
+              if (ok) push('Approved. Moved to next unreviewed item.');
+              else push('Decision finalized. It can’t be changed now.');
             }}
             onReject={() => {
-              rejectSelected();
-              push('Rejected. Moved to next unreviewed item.');
+              const confirmed = window.confirm(
+                'Are you sure you want to reject this item? Once confirmed, the decision cannot be changed.'
+              );
+              if (!confirmed) return;
+
+              const ok = rejectSelected();
+              if (ok) push('Rejected. Moved to next unreviewed item.');
+              else push('Decision finalized. It can’t be changed now.');
             }}
           />
         </div>

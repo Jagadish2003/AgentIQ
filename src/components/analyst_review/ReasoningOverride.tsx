@@ -21,6 +21,7 @@ export default function ReasoningOverride({
   onDecision: (d: Decision) => void;
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const isDecisionFinalized = !!opp && opp.decision !== 'UNREVIEWED';
 
   return (
     <div className="flex flex-col rounded-xl border border-border bg-panel overflow-hidden h-full">
@@ -41,24 +42,22 @@ export default function ReasoningOverride({
         .reason-scroll::-webkit-scrollbar-button:vertical:end:decrement { display: none; }
       `}</style>
 
-      {/* Header */}
       <div className="px-4 py-3 border-b border-border shrink-0">
         <div className="text-xl font-semibold text-text">Reasoning Override</div>
       </div>
 
-      {/* Body */}
       <div className="reason-scroll flex flex-col px-4 py-4 gap-4 overflow-y-auto flex-1">
         {!opp ? (
           <div className="text-xs text-muted">Select an opportunity to review.</div>
         ) : (
           <div className="flex flex-col gap-4">
 
-            {/* Approve / Reject (FIXED) */}
             <div className="grid grid-cols-2 gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => onDecision('APPROVED')}
-                className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all
+                disabled={isDecisionFinalized}
+                className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all w-full disabled:cursor-not-allowed
                   ${opp.decision === 'APPROVED'
                     ? 'bg-emerald-500/20 border-emerald-500/60 text-emerald-300'
                     : 'bg-emerald-500/5 border-emerald-500/25 text-emerald-100 hover:bg-emerald-500/15 hover:border-emerald-500/50 hover:text-emerald-300'
@@ -84,7 +83,8 @@ export default function ReasoningOverride({
               <button
                 type="button"
                 onClick={() => onDecision('REJECTED')}
-                className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all
+                disabled={isDecisionFinalized}
+                className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all w-full disabled:cursor-not-allowed
                   ${opp.decision === 'REJECTED'
                     ? 'bg-red-500/20 border-red-500/60 text-red-300'
                     : 'bg-red-500/5 border-red-500/25 text-red-100 hover:bg-red-500/15 hover:border-red-500/50 hover:text-red-300'
@@ -108,16 +108,16 @@ export default function ReasoningOverride({
               </button>
             </div>
 
-            {/* Last updated */}
-            <div className="shrink-0 h-[20px] text-xs text-muted flex items-center transition-opacity duration-200"
-                style={{ opacity: opp.override.updatedAt ? 1 : 0 }}>
+            <div
+              className="shrink-0 h-[20px] text-xs text-muted flex items-center transition-opacity duration-200"
+              style={{ opacity: opp.override.updatedAt ? 1 : 0 }}
+            >
               {opp.override.updatedAt &&
                 `Last updated: ${new Date(opp.override.updatedAt).toLocaleString()}`}
             </div>
 
             <div className="border-t border-border shrink-0" />
 
-            {/* Architect Override */}
             <div className="flex flex-col shrink-0">
               <div className="text-xs font-semibold text-text mb-2">Architect Override</div>
               <textarea
@@ -127,7 +127,7 @@ export default function ReasoningOverride({
                   transition-colors focus:outline-none focus:border-[#00B4B4] 
                   focus:ring-2 focus:ring-[#00B4B4]/50 disabled:opacity-50 
                   resize-none overflow-y-auto reason-scroll"
-                style={{ maxHeight: "200px", minHeight: "124px" }}
+                style={{ maxHeight: '200px', minHeight: '124px' }}
                 placeholder="Rewrite rationale in enterprise language…"
                 value={opp.override.rationaleOverride ?? ''}
                 onChange={e => onOverrideText(e.target.value)}
@@ -135,7 +135,6 @@ export default function ReasoningOverride({
               />
             </div>
 
-            {/* Override Reason */}
             <div className="flex flex-col rounded-lg border border-border bg-bg/20 p-3 shrink-0">
               <div className="text-xs font-semibold text-text mb-2">Override reason</div>
               <input
@@ -149,7 +148,6 @@ export default function ReasoningOverride({
               />
             </div>
 
-            {/* Buttons */}
             <div className="grid grid-cols-2 gap-2 shrink-0">
               <button
                 type="button"
@@ -171,7 +169,6 @@ export default function ReasoningOverride({
               </button>
             </div>
 
-            {/* Lock toggle */}
             <button
               type="button"
               onClick={onLockToggle}
@@ -194,7 +191,6 @@ export default function ReasoningOverride({
               )}
               {opp.override.isLocked ? 'Override locked — click to unlock' : 'Lock override rationale'}
             </button>
-
           </div>
         )}
       </div>

@@ -65,10 +65,27 @@ export default function AnalystReviewPage() {
               else push('Override saved.');
             }}
             onViewEvidence={() => push('Evidence panel will be linked in Screen 7.')}
-            onLockToggle={() => { toggleLock(); push('Lock toggled.'); }}
+            onLockToggle={() => {
+              toggleLock();
+              push('Lock toggled.');
+            }}
             onDecision={(d) => {
-              setDecision(d);
-              push(`Decision set to ${d}.`);
+              const action = d === 'APPROVED' ? 'approve' : 'reject';
+              const confirmed = window.confirm(
+                `Are you sure you want to ${action} this opportunity? Once confirmed, the decision cannot be changed.`
+              );
+              if (!confirmed) return;
+
+              const result = setDecision(d);
+              if (!result.ok) {
+                push(
+                  result.error === 'Decision finalized'
+                    ? 'Decision finalized. It can’t be changed now.'
+                    : (result.error ?? 'Unable to update decision.')
+                );
+              } else {
+                push(`Decision set to ${d}.`);
+              }
             }}
           />
         </div>

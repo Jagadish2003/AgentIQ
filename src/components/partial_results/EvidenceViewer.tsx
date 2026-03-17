@@ -20,6 +20,8 @@ const EvidenceViewer: React.FC<EvidenceViewerProps> = ({
   onApprove,
   onReject
 }) => {
+  const isFinalized = !!evidence && evidence.decision !== 'UNREVIEWED';
+
   return (
     <div className="flex h-full flex-col rounded-xl border border-border bg-panel p-5">
       <div className="flex items-center justify-between border-b border-border pb-4">
@@ -60,7 +62,8 @@ const EvidenceViewer: React.FC<EvidenceViewerProps> = ({
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={onApprove}
-              className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all
+              disabled={isFinalized}
+              className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all w-full disabled:cursor-not-allowed
                 ${evidence.decision === 'APPROVED'
                   ? 'bg-emerald-500/20 border-emerald-500/60 text-emerald-300'
                   : 'bg-emerald-500/5 border-emerald-500/25 text-emerald-100 hover:bg-emerald-500/15 hover:border-emerald-500/50 hover:text-emerald-300'
@@ -85,7 +88,8 @@ const EvidenceViewer: React.FC<EvidenceViewerProps> = ({
 
             <button
               onClick={onReject}
-              className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all
+              disabled={isFinalized}
+              className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg border transition-all w-full disabled:cursor-not-allowed
                 ${evidence.decision === 'REJECTED'
                   ? 'bg-red-500/20 border-red-500/60 text-red-300'
                   : 'bg-red-500/5 border-red-500/25 text-red-100 hover:bg-red-500/15 hover:border-red-500/50 hover:text-red-300'

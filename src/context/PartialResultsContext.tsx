@@ -26,8 +26,8 @@ type PartialResultsContextValue = {
   setSourceFilter: (v: string) => void;
   setActiveTab: (v: 'Entities' | 'Opportunities') => void;
 
-  approveSelected: () => void;
-  rejectSelected: () => void;
+  approveSelected: () => boolean;
+  rejectSelected: () => boolean;
   clearSelection: () => void;
 
   goPrev: () => void;
@@ -39,7 +39,7 @@ type PartialResultsContextValue = {
   sources: string[];
   countsByType: Record<EntityType, number>;
 
-  positionLabel: string; // e.g. "3 of 17"
+  positionLabel: string;
 };
 
 const Ctx = createContext<PartialResultsContextValue | null>(null);
@@ -136,12 +136,22 @@ export function PartialResultsProvider({ children }: { children: React.ReactNode
   }, [filteredEvidence]);
 
   const setDecisionForSelected = useCallback((decision: ReviewDecision) => {
-    if (!selectedEvidenceId) return;
+    if (!selectedEvidenceId) return false;
+
+    const currentEvidence = evidence.find(ev => ev.id === selectedEvidenceId);
+    if (!currentEvidence) return false;
+
+    if (currentEvidence.decision !== 'UNREVIEWED') {
+      return false;
+    }
+
     setEvidence(prev => prev.map(ev => ev.id === selectedEvidenceId ? { ...ev, decision } : ev));
-    // auto-advance (should-fix) after decision
+
     const idx = currentIndex;
     if (idx >= 0) goNextUnreviewed(idx);
-  }, [selectedEvidenceId, currentIndex, goNextUnreviewed]);
+
+    return true;
+  }, [selectedEvidenceId, evidence, currentIndex, goNextUnreviewed]);
 
   const approveSelected = useCallback(() => setDecisionForSelected('APPROVED'), [setDecisionForSelected]);
   const rejectSelected = useCallback(() => setDecisionForSelected('REJECTED'), [setDecisionForSelected]);
