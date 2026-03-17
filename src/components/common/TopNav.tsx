@@ -6,8 +6,8 @@ const items = [
   { to: '/integration-hub', label: 'Integration Hub' },
   { to: '/source-intake', label: 'Source Intake' },
   { to: '/discovery-run', label: 'Discovery Run' },
-  { to: '/normalization', label: 'Normalization' },
   { to: '/partial-results', label: 'Partial Results' },
+  { to: '/normalization', label: 'Normalization' },
   { to: '/analyst-review', label: 'Analyst Review' },
   { to: '/opportunity-map', label: 'Opportunity Map' },
   { to: '/pilot-roadmap', label: 'Pilot Roadmap' },
@@ -58,7 +58,6 @@ export default function TopNav() {
             Administrator
             <ChevronDown size={14} strokeWidth={2.5} className="text-slate-400" />
           </button>
-
 
           <div className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-panel2 hover:text-text">
             <User className="h-4 w-4 text-slate-400" />
