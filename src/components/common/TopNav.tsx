@@ -11,7 +11,7 @@ const items = [
   { to: '/analyst-review', label: 'Analyst Review' },
   { to: '/opportunity-map', label: 'Opportunity Map' },
   { to: '/pilot-roadmap', label: 'Pilot Roadmap' },
-  { to: '/reports', label: 'Reports' },
+  { to: '/executive-report', label: 'Executive Report' },
 ];
 
 export default function TopNav() {

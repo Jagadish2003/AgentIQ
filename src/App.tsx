@@ -16,6 +16,7 @@ import NormalizationInspectorPage from './pages/NormalizationInspectorPage';
 import AnalystReviewPage from './pages/AnalystReviewPage';
 import OpportunityMapPage from './pages/OpportunityMapPage';
 import PilotRoadmapPage from './pages/PilotRoadmapPage';
+import ExecutiveReportPage from './pages/ExecutiveReportPage';
 
 export default function App() {
   return (
@@ -36,7 +37,7 @@ export default function App() {
                   <Route path="/analyst-review" element={<AnalystReviewPage />} />
                   <Route path="/opportunity-map" element={<OpportunityMapPage />} />
                   <Route path="/pilot-roadmap" element={<PilotRoadmapPage />} />
-                  <Route path="/reports" element={<div className="min-h-screen text-text p-6">Reports (placeholder)</div>} />
+                  <Route path="/executive-report" element={<ExecutiveReportPage />} />
                   <Route path="*" element={<Navigate to="/integration-hub" replace />} />
                 </Routes>
                 </AnalystReviewProvider>

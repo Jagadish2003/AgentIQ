@@ -23,7 +23,6 @@ export function readinessFromPermission(p: PermissionItem): Readiness {
 }
 
 export function stageReadiness(ps: PermissionItem[]): Readiness {
-  // Gate rule: any missing => MISSING, else any pending => PENDING, else READY
   let pending = 0;
   for (const p of ps) {
     const r = readinessFromPermission(p);
@@ -53,7 +52,6 @@ export function buildPilotRoadmap(all: OpportunityCandidate[]): PilotRoadmapMode
     .slice()
     .sort((a, b) => ((b.impact - b.effort) - (a.impact - a.effort)) || (b.impact - a.impact));
 
-  // Fix A: include Strategic + Complex in selection, not just Quick Wins
   const unreviewedQW = unreviewed.filter(o => o.tier === 'Quick Win').slice(0, 3);
   const unreviewedStrategic = unreviewed.filter(o => o.tier === 'Strategic').slice(0, 2);
   const unreviewedComplex = unreviewed.filter(o => o.tier === 'Complex').slice(0, 1);
