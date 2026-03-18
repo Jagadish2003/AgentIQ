@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from '../components/common/Toast';
 
 export default function OpportunityMapPage() {
-  const { opportunities, select } = useAnalystReviewContext();
+  const { opportunities, selectedId: contextSelectedId, select } = useAnalystReviewContext();
   const nav = useNavigate();
   const { push } = useToast();
 
@@ -18,7 +18,7 @@ export default function OpportunityMapPage() {
   const [tier, setTier]     = useState<TierFilter>('All');
   const [conf, setConf]     = useState<ConfidenceFilter>('All');
   const [decision, setDecision] = useState<DecisionFilter>('All');
-  const [selectedId, setSelectedId] = useState<string | null>(opportunities[0]?.id ?? null);
+  const [selectedId, setSelectedId] = useState<string | null>(contextSelectedId ?? opportunities[0]?.id ?? null);
 
   const filtered = useMemo(() => {
     const query = q.trim().toLowerCase();
