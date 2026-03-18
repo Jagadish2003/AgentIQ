@@ -140,7 +140,7 @@ export default function ReasoningOverride({
               <input
                 type="text"
                 className="w-full rounded-md border border-border bg-bg/30 px-3 py-2 text-sm text-text placeholder:text-muted 
-                focus:outline-none focus:border-[#00B4B4] focus:ring-2 focus:ring-[#00B4B4]/50 disabled:opacity-50"
+                focus:outline-none hover:border-[#00B4B4]/50 focus:border-[#00B4B4] focus:ring-2 focus:ring-[#00B4B4]/50 disabled:opacity-50"
                 placeholder="Why are we overriding the AI rationale?"
                 value={opp.override.overrideReason ?? ''}
                 onChange={e => onOverrideReason(e.target.value)}
@@ -153,8 +153,8 @@ export default function ReasoningOverride({
                 type="button"
                 onClick={onSave}
                 disabled={opp.override.isLocked}
-                className="py-2 rounded-lg border border-border bg-panel2 text-xs font-semibold 
-                text-text hover:bg-panel2/80 disabled:opacity-50 transition-colors"
+                className="py-2 rounded-lg border border-border bg-bg/70 text-xs font-semibold 
+                text-text hover:bg-panel2  hover:border-[#00B4B4]/50 disabled:opacity-50 transition-colors"
               >
                 Save Override
               </button>
@@ -162,8 +162,8 @@ export default function ReasoningOverride({
               <button
                 type="button"
                 onClick={onViewEvidence}
-                className="py-2 rounded-lg border border-border bg-transparent text-xs font-semibold 
-                text-text hover:bg-panel2 transition-colors"
+                className="py-2 rounded-lg border border-border bg-bg/70 text-xs font-semibold 
+                text-text hover:bg-panel2 hover:border-[#00B4B4]/50 transition-colors"
               >
                 View Evidence
               </button>

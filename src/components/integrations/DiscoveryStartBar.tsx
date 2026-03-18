@@ -68,7 +68,8 @@ export default function DiscoveryStartBar({
           <button
             onClick={onStart}
             disabled={!canStart}
-            className="flex items-center gap-2 whitespace-nowrap rounded-lg bg-accent px-6 py-2 text-sm font-medium text-black transition-all hover:bg-accent/90 disabled:opacity-50"
+            
+            className="flex items-center gap-2 whitespace-nowrap rounded-lg bg-accent px-6 py-2 text-sm font-medium text-bg transition-all hover:bg-accent/90 disabled:opacity-50"
           >
             Start Discovery Run
             <MoveRight size={18} strokeWidth={2} />
@@ -81,11 +82,11 @@ export default function DiscoveryStartBar({
 
             {/* Upload button */}
             <button
-              onClick={onUpload}
-              className="rounded-md border border-border bg-panel2 px-4 py-2 text-sm text-text transition hover:bg-panel"
-            >
-              Upload Files Instead
-            </button>
+  onClick={onUpload}
+  className="rounded-md border border-muted bg-bg px-4 py-2 text-sm text-text transition hover:bg-panel2"
+>
+  Upload Files Instead
+</button>
 
             {/* ── Dynamic connector status chips ── */}
             <div className="flex items-center gap-2 rounded-md border border-slate-400 px-3 py-1.5 text-sm">
